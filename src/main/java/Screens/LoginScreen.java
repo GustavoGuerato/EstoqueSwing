@@ -82,7 +82,8 @@ public class LoginScreen extends JFrame {
        cadastroButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
-
+                LoginScreen.this.dispose();
+                new CadastroScreen().setVisible(true);
            }
        });
     }

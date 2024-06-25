@@ -1,7 +1,16 @@
 package Screens;
 
+import Dao.DaoCadastro;
+import connection.SingleConnection;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CadastroScreen extends JFrame {
     private JTextField usuarioField;
@@ -10,7 +19,7 @@ public class CadastroScreen extends JFrame {
     private JButton cadastroButton;
 
     public CadastroScreen() {
-        setTitle("Tela de Login");
+        setTitle("Tela de Cadastro");
         setSize(450, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -56,7 +65,41 @@ public class CadastroScreen extends JFrame {
         gbc.gridy = 3;
         add(cadastroButton, gbc);
 
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String usuario = usuarioField.getText();
+                String senha = new String(senhaField.getPassword());
+                if (!usuario.isEmpty() && !senha.isEmpty()) {
 
+                    if (!verificarCliente(usuario)) {
+                        JOptionPane.showMessageDialog(CadastroScreen.this, "Já existe um usuario com esse nome");
+                    } else {
+                        DaoCadastro daoCadastro = new DaoCadastro();
+                        daoCadastro.cadastrarCliente(usuario, senha);
+                        JOptionPane.showMessageDialog(CadastroScreen.this, "Usuario cadastrado com sucesso");
+                    }
+                }else {
+                    JOptionPane.showMessageDialog(CadastroScreen.this, "preencha todos os campos corretamente");
+                }
+            }
+        });
+
+    }
+
+    private boolean verificarCliente(String usuario) {
+        String sql = "SELECT 1 FROM cliente WHERE usuario = ?";
+        try (Connection connection = SingleConnection.conectar();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, usuario);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao verificar usuário: " + e.getMessage());
+            return true;
+        }
     }
 
     public static void main(String[] args) {
