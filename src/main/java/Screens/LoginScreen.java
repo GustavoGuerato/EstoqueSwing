@@ -67,10 +67,19 @@ public class LoginScreen extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (usuarioField.getText().isEmpty() && senhaField.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "preencha ambos os campos");
+                }else if(usuarioField.getText().isEmpty() || senhaField.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "falta preencher um dos 2 campos");
+                }else{
+                    JOptionPane.showMessageDialog(null, "login autorizado, seja bem vindo");
+                }
                 String usuario = usuarioField.getText();
                 verificarCliente(usuario);
             }
         });
+
+       
     }
 
     private void verificarCliente(String usuario) {
