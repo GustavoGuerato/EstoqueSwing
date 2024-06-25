@@ -72,19 +72,28 @@ public class CadastroScreen extends JFrame {
                 String senha = new String(senhaField.getPassword());
                 if (!usuario.isEmpty() && !senha.isEmpty()) {
 
-                    if (!verificarCliente(usuario)) {
-                        JOptionPane.showMessageDialog(CadastroScreen.this, "Já existe um usuario com esse nome");
+                    if (verificarCliente(usuario)) {
+                        JOptionPane.showMessageDialog(CadastroScreen.this, "Já existe um usuário com esse nome");
                     } else {
                         DaoCadastro daoCadastro = new DaoCadastro();
                         daoCadastro.cadastrarCliente(usuario, senha);
-                        JOptionPane.showMessageDialog(CadastroScreen.this, "Usuario cadastrado com sucesso");
+                        JOptionPane.showMessageDialog(CadastroScreen.this, "Usuário cadastrado com sucesso");
+
+
                     }
-                }else {
-                    JOptionPane.showMessageDialog(CadastroScreen.this, "preencha todos os campos corretamente");
+                } else {
+                    JOptionPane.showMessageDialog(CadastroScreen.this, "Preencha todos os campos corretamente");
                 }
             }
         });
 
+        cadastroButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CadastroScreen.this.dispose(); // Fechar a tela atual
+                new LoginScreen().setVisible(true); // Abrir a nova tela
+            }
+        });
     }
 
     private boolean verificarCliente(String usuario) {
@@ -98,7 +107,7 @@ public class CadastroScreen extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao verificar usuário: " + e.getMessage());
-            return true;
+            return false; // Retornar false em caso de erro para não bloquear a criação de usuário
         }
     }
 
