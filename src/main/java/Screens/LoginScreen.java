@@ -79,7 +79,12 @@ public class LoginScreen extends JFrame {
             }
         });
 
-       
+       cadastroButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+
+           }
+       });
     }
 
     private void verificarCliente(String usuario) {
