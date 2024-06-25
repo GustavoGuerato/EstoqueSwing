@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginScreen extends JFrame {
     private JTextField usuarioField;
@@ -64,17 +67,29 @@ public class LoginScreen extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                verificarCliente();
+                String usuario = usuarioField.getText();
+                verificarCliente(usuario);
             }
         });
     }
 
-    private void verificarCliente(String usuario){
-        String sql = "SELECT 1 FROM cliente Where usuario = ?";
-        try(Connection connection = SingleConnection.conectar())
+    private void verificarCliente(String usuario) {
+        String sql = "SELECT 1 FROM cliente WHERE usuario = ?";
+        try (Connection connection = SingleConnection.conectar();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, usuario);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    JOptionPane.showMessageDialog(this, "Usuário encontrado!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Usuário não encontrado!");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao verificar usuário: " + e.getMessage());
+        }
     }
-
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
