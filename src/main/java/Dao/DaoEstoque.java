@@ -25,5 +25,26 @@ public class DaoEstoque {
         }
     }
 
-    
+    public void RemoverProduto(String codigo){
+        String sql = "DELETE FROM produtos WHERE codigo = ?";
+
+        try (Connection connection = SingleConnection.conectar();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, codigo); // Utiliza o código como critério para exclusão
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Registro excluído com sucesso!");
+            } else {
+                System.out.println("Nenhum registro foi excluído.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void VisualizarEstoque(){
+        
+    }
 }
