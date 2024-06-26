@@ -90,8 +90,8 @@ public class CadastroScreen extends JFrame {
         cadastroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CadastroScreen.this.dispose(); // Fechar a tela atual
-                new LoginScreen().setVisible(true); // Abrir a nova tela
+                CadastroScreen.this.dispose();
+                new LoginScreen().setVisible(true); 
             }
         });
     }
@@ -107,7 +107,7 @@ public class CadastroScreen extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao verificar usuário: " + e.getMessage());
-            return false; // Retornar false em caso de erro para não bloquear a criação de usuário
+            return false;
         }
     }
 
