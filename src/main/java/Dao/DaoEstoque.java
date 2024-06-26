@@ -60,7 +60,15 @@ public class DaoEstoque {
                 System.out.println();
             }
         } catch (SQLException e) {
-            
+            e.printStackTrace();
+        }
+    }
+    public void atualizarProduto(String codigo, String novoNome, String novaValidade, String novaQuantidade, String novoPreco){
+        String sql = "UPDATE produtos SET nome = ?, validade = ?, quantidade = ?, preco = ? WHERE codigo = ?";
+        try(Connection connection =SingleConnection.conectar();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
