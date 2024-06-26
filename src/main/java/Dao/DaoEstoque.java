@@ -4,6 +4,7 @@ import connection.SingleConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DaoEstoque {
@@ -45,6 +46,14 @@ public class DaoEstoque {
     }
 
     public void VisualizarEstoque(){
-        
+        String sql = "SELECT * FROM produtos";
+        try(Connection connection = SingleConnection.conectar();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery()) {
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
