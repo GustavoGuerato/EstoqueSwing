@@ -73,6 +73,8 @@ public class LoginScreen extends JFrame {
                     JOptionPane.showMessageDialog(null, "falta preencher um dos 2 campos");
                 }else{
                     JOptionPane.showMessageDialog(null, "login autorizado, seja bem vindo");
+                    LoginScreen.this.dispose();
+                    new HomeScreen().setVisible(true);
                 }
                 String usuario = usuarioField.getText();
                 verificarCliente(usuario);

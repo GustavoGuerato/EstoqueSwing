@@ -78,8 +78,8 @@ public class CadastroScreen extends JFrame {
                         DaoCadastro daoCadastro = new DaoCadastro();
                         daoCadastro.cadastrarCliente(usuario, senha);
                         JOptionPane.showMessageDialog(CadastroScreen.this, "Usuário cadastrado com sucesso");
-
-
+                        CadastroScreen.this.dispose();
+                        new LoginScreen().setVisible(true);
                     }
                 } else {
                     JOptionPane.showMessageDialog(CadastroScreen.this, "Preencha todos os campos corretamente");
