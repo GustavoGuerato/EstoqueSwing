@@ -67,8 +67,33 @@ public class DaoEstoque {
         String sql = "UPDATE produtos SET nome = ?, validade = ?, quantidade = ?, preco = ? WHERE codigo = ?";
         try(Connection connection =SingleConnection.conectar();
         PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1,novoNome);
+            preparedStatement.setString(2,codigo);
+            preparedStatement.setString(3,novaValidade);
+            preparedStatement.setString(4,novaQuantidade);
+            preparedStatement.setString(5,novoPreco);
+
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void BuscarProduto(String codigo){
+        String sql = "SELECT * from produtos WHERE codigo = ?";
+        try(Connection connection = SingleConnection.conectar();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1,codigo);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()){
+                    //escrever os dados do produto
+                }else{
+                    System.out.println("produto não foi localizado" + codigo);
+                }
+            }
+
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }
