@@ -2,10 +2,7 @@ package Dao;
 
 import connection.SingleConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DaoEstoque {
 
@@ -50,10 +47,21 @@ public class DaoEstoque {
         try(Connection connection = SingleConnection.conectar();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery()) {
+            ResultSetMetaData metaData =resultSet.getMetaData();
+            int numColumns = metaData.getColumnCount();
+            for (int i = 1;i<=numColumns;i++){
+                System.out.printf("%-20s", metaData.getColumnName(i));
+            }
 
-
+            while(resultSet.next()){
+                for (int i = 1;i<=numColumns;i++){
+                    System.out.printf("%-20s", metaData.getCatalogName(i));
+                }
+                System.out.println();
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            
+            e.printStackTrace();
         }
     }
 }
