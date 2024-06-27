@@ -17,6 +17,7 @@ public class DaoEstoque {
             preparedStatement.setString(3,validade);
             preparedStatement.setString(4,quantidade);
             preparedStatement.setString(5,preco);
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -28,7 +29,7 @@ public class DaoEstoque {
 
         try (Connection connection = SingleConnection.conectar();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, codigo); // Utiliza o código como critério para exclusão
+            preparedStatement.setString(1, codigo); /
 
             int rowsDeleted = preparedStatement.executeUpdate();
             if (rowsDeleted > 0) {
@@ -72,6 +73,7 @@ public class DaoEstoque {
             preparedStatement.setString(3,novaValidade);
             preparedStatement.setString(4,novaQuantidade);
             preparedStatement.setString(5,novoPreco);
+            preparedStatement.executeUpdate();
 
 
         } catch (SQLException e) {
