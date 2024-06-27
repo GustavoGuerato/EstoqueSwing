@@ -1,6 +1,7 @@
 package Screens;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +13,16 @@ public class RemoverProduto extends JFrame{
 
     public RemoverProduto(){
 
-    
+        setTitle("RemoverProduto");
+        setSize(450,500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);  // Espaçamento entre os componentes
+
 
 
         voltarHome.addActionListener(new ActionListener() {
