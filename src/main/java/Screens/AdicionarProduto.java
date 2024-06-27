@@ -18,6 +18,8 @@ public class AdicionarProduto extends JFrame {
 
     public AdicionarProduto(){
 
+        
+
         addProduto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,7 +27,16 @@ public class AdicionarProduto extends JFrame {
                 String nomeProduto = nome.getText();
                 String codigoProduto = codigo.getText();
                 String validadeProduto = validade.getText();
-                
+                String quantidadeProduto = quantidade.getText();
+                String precoProduto = preco.getText();
+
+                if (!nomeProduto.isEmpty() && !codigoProduto.isEmpty() && !validadeProduto.isEmpty()
+                        && !quantidadeProduto.isEmpty() && !precoProduto.isEmpty()) {
+                    daoEstoque.AdicionarProduto(nomeProduto, codigoProduto, validadeProduto, quantidadeProduto, precoProduto);
+                    JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos antes de adicionar o produto.");
+                }
             }
         });
 

@@ -29,7 +29,7 @@ public class DaoEstoque {
 
         try (Connection connection = SingleConnection.conectar();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, codigo); /
+            preparedStatement.setString(1, codigo);
 
             int rowsDeleted = preparedStatement.executeUpdate();
             if (rowsDeleted > 0) {
