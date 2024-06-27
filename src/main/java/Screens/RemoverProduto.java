@@ -13,8 +13,8 @@ public class RemoverProduto extends JFrame{
 
     public RemoverProduto(){
 
-        setTitle("RemoverProduto");
-        setSize(450,500);
+        setTitle("Remover Produto");
+        setSize(450, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -23,6 +23,29 @@ public class RemoverProduto extends JFrame{
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);  // Espaçamento entre os componentes
 
+        // Initialize components
+        codigo = new JTextField(20);
+        verificarButton = new JButton("Verificar");
+        confirmarButton = new JButton("Confirmar");
+        voltarHome = new JButton("Voltar");
+
+        // Add components to the layout
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(new JLabel("Código do Produto:"), gbc);
+        gbc.gridx = 1;
+        add(codigo, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        add(verificarButton, gbc);
+
+        gbc.gridy = 2;
+        add(confirmarButton, gbc);
+
+        gbc.gridy = 3;
+        add(voltarHome, gbc);
 
 
         voltarHome.addActionListener(new ActionListener() {
