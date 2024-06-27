@@ -87,7 +87,16 @@ public class DaoEstoque {
 
             try(ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()){
-                    //escrever os dados do produto
+                    String nome = resultSet.getString("nome");
+                    String validade = resultSet.getString("validade");
+                    String quantidade = resultSet.getString("quantidade");
+                    String preco = resultSet.getString("preco");
+
+                    System.out.println("o produto com o codigo" + codigo + "foi localizado");
+                    System.out.println("Nome " + nome);
+                    System.out.println("validade é: " + validade);
+                    System.out.println("temos uma quantidade de: " + quantidade);
+                    System.out.println("o preço desse produto é:  " + preco);
                 }else{
                     System.out.println("produto não foi localizado" + codigo);
                 }
@@ -96,5 +105,9 @@ public class DaoEstoque {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public void gerarRelatorioEstoque(){
+        //fazer mais tarde
     }
 }
