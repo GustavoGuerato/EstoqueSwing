@@ -109,6 +109,43 @@ public class DaoEstoque {
         }
     }
 
+
+    public boolean BuscarProdutoBool(String codigo) {
+        String sql = "SELECT * FROM produtos WHERE codigo = ?";
+        boolean encontrado = false;
+
+        try (Connection connection = SingleConnection.conectar();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, codigo);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String nome = resultSet.getString("nome");
+                    String validade = resultSet.getString("validade");
+                    String quantidade = resultSet.getString("quantidade");
+                    String preco = resultSet.getString("preco");
+
+                    System.out.println("O produto com o código " + codigo + " foi localizado:");
+                    System.out.println("Nome: " + nome);
+                    System.out.println("Validade: " + validade);
+                    System.out.println("Quantidade: " + quantidade);
+                    System.out.println("Preço: " + preco);
+
+                    encontrado = true;
+                } else {
+                    System.out.println("Produto não foi localizado: " + codigo);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return encontrado;
+    }
+
+
     public void gerarRelatorioEstoque(){
         //fazer mais tarde
     }

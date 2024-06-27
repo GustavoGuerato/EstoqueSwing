@@ -18,7 +18,7 @@ public class AdicionarProduto extends JFrame {
 
     public AdicionarProduto(){
 
-        
+
 
         addProduto.addActionListener(new ActionListener() {
             @Override
@@ -32,8 +32,16 @@ public class AdicionarProduto extends JFrame {
 
                 if (!nomeProduto.isEmpty() && !codigoProduto.isEmpty() && !validadeProduto.isEmpty()
                         && !quantidadeProduto.isEmpty() && !precoProduto.isEmpty()) {
-                    daoEstoque.AdicionarProduto(nomeProduto, codigoProduto, validadeProduto, quantidadeProduto, precoProduto);
-                    JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
+
+                    boolean produtoExiste = daoEstoque.BuscarProdutoBool(codigoProduto);
+
+                    if (!produtoExiste) {
+                        daoEstoque.AdicionarProduto(nomeProduto, codigoProduto, validadeProduto, quantidadeProduto, precoProduto);
+                        JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Produto com código " + codigoProduto + " já existe no estoque.");
+                    }
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos antes de adicionar o produto.");
                 }
