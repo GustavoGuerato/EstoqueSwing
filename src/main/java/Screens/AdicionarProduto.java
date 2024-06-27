@@ -4,6 +4,7 @@ import Dao.DaoCadastro;
 import Dao.DaoEstoque;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +19,15 @@ public class AdicionarProduto extends JFrame {
 
     public AdicionarProduto(){
 
+        setTitle("adicionar Produto");
+        setSize(450,500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
 
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5,5,5,5);
 
         addProduto.addActionListener(new ActionListener() {
             @Override
