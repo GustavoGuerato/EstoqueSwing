@@ -1,5 +1,7 @@
 package Screens;
 
+import Dao.DaoEstoque;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,6 +48,56 @@ public class RemoverProduto extends JFrame{
 
         gbc.gridy = 3;
         add(voltarHome, gbc);
+
+        verificarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DaoEstoque daoEstoque = new DaoEstoque();
+                String codigoProduto = codigo.getText();
+                if (!codigoProduto.isEmpty()) {
+                    boolean produtoExiste = daoEstoque.BuscarProdutoBool(codigoProduto);
+
+                    if (produtoExiste) {
+                        JOptionPane.showMessageDialog(null, "O produto com codigo " + codigoProduto +
+                                "existe");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "o Produto não foi localizado");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "por favor preencha o campo Codigo para procurarmos");
+                }
+            }
+        });
+
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object[] opcoes ={"sim","não"};
+                DaoEstoque daoEstoque = new DaoEstoque();
+                String codigoProduto = codigo.getText();
+
+                if (!codigoProduto.isEmpty()) {
+                    boolean produtoExiste = daoEstoque.BuscarProdutoBool(codigoProduto);
+
+                    if (produtoExiste) {
+                        int escolha = JOptionPane.showOptionDialog(null,
+                                "Você quer apagar todos os dados do codigo" + codigo,
+                                "Apagar?",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.WARNING_MESSAGE,
+                                null,
+                                opcoes,
+                                opcoes[1]);
+                        if (escolha == JOptionPane.YES_OPTION){
+                            JOptionPane.showMessageDialog(null,"excluindo todos os dados do codigo" +codigo);
+                            daoEstoque.RemoverProduto(String.valueOf(codigo));
+                        }else{
+                            JOptionPane.showMessageDialog(null, "acao cancelada");
+                        }
+                    }
+                }
+            }
+        });
 
 
         voltarHome.addActionListener(new ActionListener() {
