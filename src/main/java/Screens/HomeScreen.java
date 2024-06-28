@@ -11,6 +11,7 @@ public class HomeScreen extends JFrame {
     private JMenuItem adicionarItem;
     private JMenuItem visualizarEstoque;
     private JMenuItem removerItem;
+    private JMenuItem atualizarProduto;
     private JMenu Logout;
     private JMenuItem logout;
 
@@ -30,10 +31,12 @@ public class HomeScreen extends JFrame {
         adicionarItem = new JMenuItem("Adicionar Item");
         visualizarEstoque = new JMenuItem("Visualizar Estoque");
         removerItem = new JMenuItem("Remover Item");
+        atualizarProduto = new JMenuItem("Atualizar Produto");
 
         Estoque.add(adicionarItem);
         Estoque.add(visualizarEstoque);
         Estoque.add(removerItem);
+        Estoque.add(atualizarProduto);
 
         Logout = new JMenu("Logout");
 
@@ -76,6 +79,14 @@ public class HomeScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 HomeScreen.this.dispose();
                 new LoginScreen().setVisible(true);
+            }
+        });
+
+        atualizarProduto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HomeScreen.this.dispose();
+                new AtualizarProduto().setVisible(true);
             }
         });
 
