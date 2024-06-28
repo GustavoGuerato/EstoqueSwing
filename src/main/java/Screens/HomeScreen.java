@@ -47,6 +47,30 @@ public class HomeScreen extends JFrame {
         setJMenuBar(BarraDeMenu);
 
 
+        adicionarItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HomeScreen.this.dispose();
+                new AdicionarProduto().setVisible(true);
+            }
+        });
+
+        visualizarEstoque.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HomeScreen.this.dispose();
+
+            }
+        });
+
+        removerItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HomeScreen.this.dispose();
+                new RemoverProduto().setVisible(true);
+            }
+        });
+
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
