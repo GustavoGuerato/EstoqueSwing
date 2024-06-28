@@ -2,6 +2,8 @@ package Screens;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AtualizarProduto extends JFrame {
     private JTextField codigo;
@@ -72,6 +74,34 @@ public class AtualizarProduto extends JFrame {
         add(mudarProduto, gbc);
         gbc.gridx = 1;
         add(voltarHome, gbc);
+
+        voltarHome.addActionListener(new ActionListener() {
+            Object opcoes[] = {"sim","não"};
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!codigo.getText().isEmpty()) {
+                   JOptionPane.showMessageDialog(null ,"fechando o programa");
+                   AtualizarProduto.this.dispose();
+                   new HomeScreen().setVisible(true);
+                }else {
+                    int escolha = JOptionPane.showOptionDialog(null,
+                            "Você quer apagar todos os dados e voltar para o menu principal?",
+                            "Apagar?",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE,
+                            null,
+                            opcoes,
+                            opcoes[1]);
+                    if (escolha == JOptionPane.YES_OPTION){
+                        JOptionPane.showMessageDialog(null, "apagando todos os dados e fechando o programa");
+                        AtualizarProduto.this.dispose();
+                        new HomeScreen().setVisible(true);
+                    }else {
+                        JOptionPane.showMessageDialog(null,"acao cancelada");
+                    }
+                }
+            }
+        });
 
     }
 

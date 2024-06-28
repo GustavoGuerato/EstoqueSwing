@@ -108,6 +108,7 @@ public class RemoverProduto extends JFrame{
                 if (codigo.getText().isEmpty()){
                     JOptionPane.showMessageDialog(null,"Fechando o programa");
                     RemoverProduto.this.dispose();
+                    new HomeScreen().setVisible(true);
                 }else {
                     int escolha = JOptionPane.showOptionDialog(null,
                             "Você quer apagar todos os dados e voltar para o menu principal?",
